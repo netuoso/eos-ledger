@@ -57,16 +57,16 @@ public_key = result[1: 1 + result[0]]
 head = 0x03 if (public_key[64] & 0x01) == 1 else 0x02
 public_key_compressed = bytearray([head]) + public_key[1:33]
 
-print "           Public key " + str(public_key).encode('hex')
-print "Public key compressed " + str(public_key_compressed).encode('hex')
+print("           Public key " + str(public_key).encode('hex'))
+print("Public key compressed " + str(public_key_compressed).encode('hex'))
 
 ripemd = hashlib.new('ripemd160')
 ripemd.update(public_key_compressed)
 check = ripemd.digest()[:4]
 
 buff = public_key_compressed + check
-print "Calculated from public key: Address EOS" + b58encode(str(buff))
-print "      Received from ledger: Address " + str(address)
+print("Calculated from public key: Address EOS" + b58encode(str(buff)))
+print("      Received from ledger: Address " + str(address))
 
 apdu = "D4020101".decode('hex') + chr(len(donglePath) + 1) + chr(len(donglePath) / 4) + donglePath
 result = dongle.exchange(bytes(apdu))
