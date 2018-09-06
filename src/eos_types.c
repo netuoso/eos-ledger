@@ -199,9 +199,9 @@ uint32_t public_key_to_wif(uint8_t *publicKey, uint32_t keyLength, char *out, ui
     os_memmove(temp + 33, check, 4);
 
     os_memset(out, 0, outLength);
-    out[0] = 'E';
-    out[1] = 'O';
-    out[2] = 'S';
+    out[0] = 'S';
+    out[1] = 'T';
+    out[2] = 'M';
     addressLen = buffer_to_encoded_base58(temp, sizeof(temp), out + 3, outLength - 3);
     if (addressLen + 3 >= outLength) {
         THROW(EXCEPTION_OVERFLOW);
